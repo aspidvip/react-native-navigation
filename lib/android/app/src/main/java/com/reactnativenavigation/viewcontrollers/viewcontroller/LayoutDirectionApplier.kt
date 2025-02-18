@@ -11,6 +11,7 @@ class LayoutDirectionApplier {
                 root.activity.window.decorView.layoutDirection = options.layout.direction.get()
                 I18nUtil.getInstance().allowRTL(context, options.layout.direction.isRtl)
                 I18nUtil.getInstance().forceRTL(context, options.layout.direction.isRtl)
-            }}
+            }
+        }
     }
 }
