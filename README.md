@@ -1,9 +1,7 @@
-[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
-
 <h1 align="center">
   <img src=".logo.png"/><br/>
-  React Native Navigation
-</h1>
+  React Native Navigation for RN 75
+</h1> 
 
 <p align="center">
   <a href="https://www.npmjs.com/package/react-native-navigation"><img src="https://img.shields.io/npm/dw/react-native-navigation.svg?style=flat-square" alt="NPM downloads"></a>
