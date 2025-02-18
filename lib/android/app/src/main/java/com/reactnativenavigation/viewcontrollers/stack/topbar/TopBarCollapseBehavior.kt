@@ -7,7 +7,7 @@ import com.reactnativenavigation.views.stack.topbar.TopBar
 
 class TopBarCollapseBehavior(private val topBar: TopBar) : ScrollEventListener.OnScrollListener, ScrollEventListener.OnDragListener {
     private var scrollEventListener: ScrollEventListener? = null
-    private val animator: TopBarAppearanceAnimator = TopBarAppearanceAnimator(topBar)
+    private val animator: TopBarAnimator = TopBarAnimator(topBar)
 
     fun enableCollapse(scrollEventListener: ScrollEventListener?) {
         this.scrollEventListener = scrollEventListener

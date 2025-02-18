@@ -1,6 +1,5 @@
 #import "RNNStackPresenter.h"
 #import "InteractivePopGestureDelegate.h"
-#import "RNNConvert.h"
 #import "RNNCustomTitleView.h"
 #import "RNNReactBackgroundView.h"
 #import "RNNStackController.h"
@@ -69,7 +68,7 @@
     stack.interactivePopGestureRecognizer.delegate = _interactivePopGestureDelegate;
 
     [stack
-        setBarStyle:[RNNConvert UIBarStyle:[withDefault.topBar.barStyle withDefault:@"default"]]];
+        setBarStyle:[RCTConvert UIBarStyle:[withDefault.topBar.barStyle withDefault:@"default"]]];
     [stack setRootBackgroundImage:[withDefault.rootBackgroundImage withDefault:nil]];
     [stack setNavigationBarTestId:[withDefault.topBar.testID withDefault:nil]];
     [stack setNavigationBarVisible:[withDefault.topBar.visible withDefault:YES]
@@ -127,7 +126,7 @@
     }
 
     if (mergeOptions.topBar.barStyle.hasValue) {
-        [stack setBarStyle:[RNNConvert UIBarStyle:mergeOptions.topBar.barStyle.get]];
+        [stack setBarStyle:[RCTConvert UIBarStyle:mergeOptions.topBar.barStyle.get]];
     }
 
     if (mergeOptions.topBar.background.clipToBounds.hasValue) {

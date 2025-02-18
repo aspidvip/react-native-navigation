@@ -233,7 +233,7 @@ public class StackPresenter {
 
         topBar.setBorderHeight(topBarOptions.borderHeight.get(0d));
         topBar.setBorderColor(topBarOptions.borderColor.get(DEFAULT_BORDER_COLOR));
-        topBarController.setBackgroundColor(topBarOptions, Color.WHITE);
+        topBar.setBackgroundColor(topBarOptions.background.color.get(Color.WHITE));
 
         if (topBarOptions.background.component.hasValue()) {
             View createdComponent = findBackgroundComponent(topBarOptions.background.component);
@@ -417,23 +417,18 @@ public class StackPresenter {
         }
     }
 
-    public List<Animator> getAdditionalPushAnimations(
-            StackController stack,
-            ViewController<?> appearingCtrl,
+    public List<Animator> getAdditionalPushAnimations(StackController stack, ViewController<?> appearing,
             Options appearingOptions) {
         return CollectionUtils.asList(
-                topBarController.getPushAnimation(appearingOptions, getTopBarTranslationAnimationDelta(stack, appearingCtrl)),
-                perform(appearingCtrl.getStatusBarController(), null, sbc -> sbc.getStatusBarPushAnimation(appearingOptions)),
-                perform(bottomTabsController, null, btc -> btc.getPushAnimation(appearingOptions))
-            );
+                topBarController.getPushAnimation(appearingOptions,
+                        getTopBarTranslationAnimationDelta(stack, appearing)),
+                perform(bottomTabsController, null, btc -> btc.getPushAnimation(appearingOptions)));
     }
 
-    public List<Animator> getAdditionalPopAnimations(Options appearingOptions, Options disappearingOptions, ViewController<?> appearingCtrl) {
+    public List<Animator> getAdditionalPopAnimations(Options appearingOptions, Options disappearingOptions) {
         return CollectionUtils.asList(
                 topBarController.getPopAnimation(appearingOptions, disappearingOptions),
-                perform(appearingCtrl.getStatusBarController(), null, sbc -> sbc.getStatusBarPopAnimation(appearingOptions, disappearingOptions)),
-                perform(bottomTabsController, null, btc -> btc.getPopAnimation(appearingOptions, disappearingOptions))
-        );
+                perform(bottomTabsController, null, btc -> btc.getPopAnimation(appearingOptions, disappearingOptions)));
     }
 
     public List<Animator> getAdditionalSetRootAnimations(StackController stack, ViewController<?> appearing,
@@ -623,7 +618,9 @@ public class StackPresenter {
         if (resolveOptions.subtitle.font.hasValue()) {
             topBar.setSubtitleTypeface(typefaceLoader, resolveOptions.subtitle.font);
         }
-        topBarController.setBackgroundColor(topBarOptions);
+
+        if (topBarOptions.background.color.hasValue())
+            topBar.setBackgroundColor(topBarOptions.background.color.get());
 
         if (topBarOptions.background.component.hasValue()) {
             if (backgroundControllers.containsKey(component)) {

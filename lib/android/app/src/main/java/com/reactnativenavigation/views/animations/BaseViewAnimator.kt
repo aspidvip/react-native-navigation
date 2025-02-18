@@ -12,7 +12,7 @@ import com.reactnativenavigation.options.animations.ViewAnimationOptions
 import com.reactnativenavigation.options.params.Bool
 import com.reactnativenavigation.utils.resetViewProperties
 
-open class BaseViewAppearanceAnimator<T : View>(
+open class BaseViewAnimator<T : View>(
         private val hideDirection: HideDirection,
         view: T? = null,
         private val defaultAnimatorCreator: ViewAnimatorCreator = DefaultViewAnimatorCreator()
@@ -90,16 +90,16 @@ open class BaseViewAppearanceAnimator<T : View>(
 
     fun isAnimatingShow() = showAnimator.isRunning
 
-    fun getPushAnimation(animationOpts: ViewAnimationOptions, visible: Bool, additionalDy: Float = 0f): Animator? {
+    fun getPushAnimation(animation: ViewAnimationOptions, visible: Bool, additionalDy: Float = 0f): Animator? {
         if (isOrWillBeVisible && visible.isFalse) {
             showAnimator.cancel()
-            hideAnimator = animationOpts.exit.getAnimation(view, defaultAnimatorCreator.getHideAnimator(view, hideDirection, additionalDy))
+            hideAnimator = animation.exit.getAnimation(view, defaultAnimatorCreator.getHideAnimator(view, hideDirection, additionalDy))
             return hideAnimator
         }
 
         if (isOrWillBeHidden && visible.isTrueOrUndefined) {
             hideAnimator.cancel()
-            showAnimator = animationOpts.enter.getAnimation(view, defaultAnimatorCreator.getShowAnimator(view, hideDirection, additionalDy))
+            showAnimator = animation.enter.getAnimation(view, defaultAnimatorCreator.getShowAnimator(view, hideDirection, additionalDy))
             return showAnimator
         }
 

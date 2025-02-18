@@ -29,12 +29,12 @@ class ModalContentLayout(context: Context?) : ReactViewGroup(context), RootView{
             reactContext.runOnNativeModulesQueueThread(object : GuardedRunnable(reactContext) {
                 override fun runGuarded() {
                     val uiManager = this@ModalContentLayout.getReactContext().getNativeModule(
-                            UIManagerModule::class.java
+                        UIManagerModule::class.java
                     ) as UIManagerModule
                     uiManager.updateNodeSize(
-                            viewTag,
-                            this@ModalContentLayout.viewWidth,
-                            this@ModalContentLayout.viewHeight
+                        viewTag,
+                        this@ModalContentLayout.viewWidth,
+                        this@ModalContentLayout.viewHeight
                     )
                 }
             })
