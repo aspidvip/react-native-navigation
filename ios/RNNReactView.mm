@@ -221,6 +221,15 @@
     return self;
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *hitView = [super hitTest:point withEvent:event];
+    // Пустая область Fabric-поверхности не должна перехватывать касания под overlay.
+    if (self.passThroughTouches && (hitView == self || hitView == self.view)) {
+        return nil;
+    }
+    return hitView;
+}
+
 - (RCTRootViewSizeFlexibility)sizeFlexibility {
     return convertToRootViewSizeFlexibility(super.sizeMeasureMode);
 }
