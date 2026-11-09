@@ -1,6 +1,6 @@
 {
   "name": "react-native-navigation",
-  "version": "8.8.9",
+  "version": "8.9.0",
   "description": "React Native Navigation - truly native navigation for iOS and Android",
   "license": "MIT",
   "nativePackage": true,
@@ -19,19 +19,19 @@
   "bin": {
     "rnn-link": "./autolink/postlink/run.js"
   },
-  "main": "./lib/module/index.js",
-  "types": "./lib/typescript/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "react-native": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./lib/typescript/index.d.ts",
-      "default": "./lib/module/index.js",
+      "types": "./src/index.ts",
+      "default": "./src/index.ts",
       "source": "./src/index.ts",
       "react-native": "./src/index.ts"
     },
     "./Mock": {
-      "types": "./lib/typescript/Mock/index.d.ts",
-      "default": "./lib/module/Mock/index.js",
+      "types": "./src/Mock/index.ts",
+      "default": "./src/Mock/index.ts",
       "source": "./src/Mock/index.ts",
       "react-native": "./src/Mock/index.ts"
     },
@@ -56,7 +56,6 @@
     "install-android": "node ./scripts/install-android",
     "uninstall-android": "cd playground/android && ./gradlew uninstallAll",
     "clean": "node ./scripts/clean",
-    "prepare": "bob build",
     "start": "node ./scripts/start",
     "pod-install": "yarn workspace react-native-navigation-playground pod-install",
     "test-js": "node ./scripts/test-js",
@@ -68,7 +67,8 @@
     "test-e2e-ios-ci": "yarn workspace react-native-navigation-playground test-e2e-ios-ci",
     "test-all": "node ./scripts/test-all",
     "test-release": "node --test scripts/release/*.test.cjs",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./",
+    "build": "bob build"
   },
   "peerDependencies": {
     "react": "*",

@@ -478,8 +478,15 @@ static NSString *const setDefaultOptions = @"setDefaultOptions";
 
     __weak UIViewController *weakOverlayVC = overlayVC;
     [overlayVC setReactViewReadyCallback:^{
-      UIWindow *overlayWindow =
-          [[RNNOverlayWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+      RNNOverlayWindow *overlayWindow;
+      UIWindowScene *windowScene = self->_mainWindow.windowScene;
+      if (windowScene) {
+          // Overlay должен принадлежать той же сцене, что и основное окно приложения.
+          overlayWindow = [[RNNOverlayWindow alloc] initWithWindowScene:windowScene];
+      } else {
+          overlayWindow = [[RNNOverlayWindow alloc] initWithFrame:self->_mainWindow.bounds];
+      }
+      overlayWindow.frame = self->_mainWindow.bounds;
       overlayWindow.rootViewController = weakOverlayVC;
       if ([weakOverlayVC.resolveOptionsWithDefault.overlay.handleKeyboardEvents withDefault:NO]) {
           [self->_overlayManager showOverlayWindowAsKeyWindow:overlayWindow];
